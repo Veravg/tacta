@@ -1,4 +1,18 @@
 
+require 'json'
+
+def read_contacts
+  json = File.read( 'contacts.json' )
+  array = JSON.parse( json, { :symbolize_names => true} )
+end
+
+def write_contacts( contacts )
+  File.open( "contacts.json", "w" ) do |f|
+    json = JSON.pretty_generate( contacts )
+    f.write( json )
+  end
+end
+
 def ask( prompt )
   print prompt
   gets.chomp
@@ -59,6 +73,8 @@ def action_delete( contacts )
   puts "Contacts for #{contacts[i-1][:name]} deleted."
 
   contacts.delete_at( i-1 )
+
+  write_contacts( contacts )
 end
 
 def action_error
@@ -77,6 +93,8 @@ def action_search( contacts )
 end
 
 loop do
+    contacts = read_contacts
+
     index( contacts )
     # desplay method incex ( contacts )
 
