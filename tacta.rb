@@ -11,6 +11,11 @@ contacts << { name: "Malcom X"        , phone: "+1 310 155 8822" , email: "x@the
 
 # add << contacten in contacts
 
+def ask( prompt )
+  print prompt
+  gets.chomp
+end
+
 def index( contacts )
   contacts.each_with_index do |contact, i|
      puts "#{i+1}) #{contact[:name]}"
@@ -21,11 +26,6 @@ make index number i
 output 1) Thomas Jefferson  2) Charles Darwin ...
 =end
 
-def ask( prompt )
-  print prompt
-  gets.chomp
-end
-
 def show ( contact )
   puts "#{contact[:name]}"
   puts "phone: #{contact[:phone]}"
@@ -33,16 +33,33 @@ def show ( contact )
 end
 
 def create_new
-      contact = {}
+  contact = {}
 
-      puts
-      puts "Enter contact info:"
+  puts
+  puts "Enter contact info:"
 
-      contact[:name] = ask "Name? "
-      contact[:phone] = ask "Phone? "
-      contact[:email] = ask "Email? "
+  contact[:name] = ask "Name? "
+  contact[:phone] = ask "Phone? "
+  contact[:email] = ask "Email? "
 
-      contact
+  contact
+end
+
+def action_new( contacts )
+  contact = create_new
+
+  contacts << contact
+
+  puts "New contact createted:"
+  puts
+
+  show( contact )
+end
+
+def action_show( contact, i )
+  contact = contacts[i-1]
+
+  show( contact )
 end
 
 loop do
@@ -55,22 +72,9 @@ loop do
     break if response == "q"
 
     if response == 'n'
-      contact = create_new
-
-      contacts << contact
-
-      puts "New contact createted:"
-      puts
-
-      show( contact )
-
+      action_new( contacts )
     else
-      i = response.to_i
-      # change array to integer   f (float) s (string)
-
-      contact = contacts[i-1]
-
-      show( contact )
+      action_show( contacts, response.to_i )
   end
 end
 
