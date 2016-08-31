@@ -32,6 +32,19 @@ def show ( contact )
   puts "email: #{contact[:email]}"
 end
 
+def create_new
+      contact = {}
+
+      puts
+      puts "Enter contact info:"
+
+      contact[:name] = ask "Name? "
+      contact[:phone] = ask "Phone? "
+      contact[:email] = ask "Email? "
+
+      contact
+end
+
 loop do
     index( contacts )
     # desplay method incex ( contacts )
@@ -42,19 +55,14 @@ loop do
     break if response == "q"
 
     if response == 'n'
-      contact = {}
-
-      puts
-      puts "Enter contact info:"
-
-      contact[:name] = ask "Name? "
-      contact[:phone] = ask "Phone? "
-      contact[:email] = ask "Email? "
+      contact = create_new
 
       contacts << contact
 
       puts "New contact createted:"
       puts
+
+      show( contact )
 
     else
       i = response.to_i
