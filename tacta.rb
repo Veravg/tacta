@@ -13,15 +13,23 @@ contacts.each_with_index do |contact, i|
 end
 # output 1) Thomas Jefferson  2) Charles Darwin ...
 
+index( contacts )
 puts
-print "Who would you like to see? "
-response = gets.chomp
+response = ask "Who would you like to see? "
 
 i = response.to_i
 
 contact = contacts[i-1]
 
 puts
+show( contact )
+
+puts
 puts "#{contact[:name]}"
 puts "phone: #{contact[:phone]}"
 puts "email: #{contact[:email]}"
+
+def ask( prompt )
+  print prompt
+  gets.chomp
+edn
