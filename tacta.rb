@@ -70,7 +70,22 @@ def action_delete( contacts )
 
   puts "Contacts for #{contacts[i-1][:name]} deleted."
 
-  contact.delete_at( i-1 )
+  contacts.delete_at( i-1 )
+end
+
+def action_error
+  puts "Sorry, I don't recognize that command."
+end
+
+def action_search( contacts )
+  puts
+  pattern = ask "Search for? "
+
+  contacts.each do |contact|
+    if contact[:name] =~ /\b#{pattern}/i
+      show( contact )
+    end
+  end
 end
 
 loop do
@@ -78,7 +93,7 @@ loop do
     # desplay method incex ( contacts )
 
     puts
-    response = ask "Who would you like to see (n for new, q to quit)? "
+    response = ask "Who would you like to see (n for new, d for delete, s for search, to quit)? "
 
     break if response == "q"
 
@@ -86,8 +101,12 @@ loop do
       action_new( contacts )
     elsif response== 'd'
       action_delete( contacts )
-    else
+    elsif response== "s"
+      action_search( contacts )
+    elsif response =~ /[0-9]+/
       action_show( contacts, response.to_i )
+    else
+      action_error
   end
 end
 
