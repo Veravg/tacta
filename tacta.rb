@@ -62,6 +62,17 @@ def action_show( contact, i )
   show( contact )
 end
 
+def action_delete( contacts )
+  puts
+  response = ask "Delete which contact? "
+
+  i= response.to_i
+
+  puts "Contacts for #{contacts[i-1][:name]} deleted."
+
+  contact.delete_at( i-1 )
+end
+
 loop do
     index( contacts )
     # desplay method incex ( contacts )
@@ -73,6 +84,8 @@ loop do
 
     if response == 'n'
       action_new( contacts )
+    elsif response== 'd'
+      action_delete( contacts )
     else
       action_show( contacts, response.to_i )
   end
