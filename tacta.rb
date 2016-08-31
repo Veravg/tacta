@@ -1,3 +1,5 @@
+
+
 contacts = []
 
 contacts << { name: "Thomas Jefferson", phone: "+1 206 310 1369" , email: "tjeff@us.gov"       }
@@ -10,3 +12,16 @@ contacts.each_with_index do |contact, i|
    puts "#{i+1}) #{contact[:name]}"
 end
 # output 1) Thomas Jefferson  2) Charles Darwin ...
+
+puts
+print "Who would you like to see? "
+response = gets.chomp
+
+i = response.to_i
+
+contact = contacts[i-1]
+
+puts
+puts "#{contact[:name]}"
+puts "phone: #{contact[:phone]}"
+puts "email: #{contact[:email]}"
