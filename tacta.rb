@@ -33,18 +33,38 @@ def show ( contact )
 end
 
 loop do
-  index( contacts )
-  # desplay method incex ( contacts )
+    index( contacts )
+    # desplay method incex ( contacts )
 
-  puts
-  response = ask "Who would you like to see? "
+    puts
+    response = ask "Who would you like to see (n for new, q to quit)? "
 
-  i = response.to_i
-  # change array to integer   f (float) s (string)
+    break if response == "q"
 
-  contact = contacts[i-1]
+    if response == 'n'
+      contact = {}
 
-  puts
-  show( contact )
-  puts
+      puts
+      puts "Enter contact info:"
+
+      contact[:name] = ask "Name? "
+      contact[:phone] = ask "Phone? "
+      contact[:email] = ask "Email? "
+
+      contacts << contact
+
+      puts "New contact createted:"
+      puts
+
+    else
+      i = response.to_i
+      # change array to integer   f (float) s (string)
+
+      contact = contacts[i-1]
+
+      show( contact )
+  end
 end
+
+puts
+puts "Bye!"
