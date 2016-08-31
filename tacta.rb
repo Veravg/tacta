@@ -1,8 +1,6 @@
 
 require './contact_file'
 
-
-
 def ask( prompt )
   print prompt
   gets.chomp
